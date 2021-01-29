@@ -1,6 +1,8 @@
 package com.capstone.habitbuilder.habit;
 
 
+import com.capstone.habitbuilder.enjoyer.Enjoyer;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -25,6 +27,11 @@ public class Habit {
     private Boolean reminder;
     private LocalDateTime createdDate;
     private LocalDateTime updatedDate;
+
+    // Setup many to one relationship with Enjoyer
+    @ManyToOne
+    @JoinColumn(name = "ENJOYER_ID", referencedColumnName = "ID" )
+    private Enjoyer enjoyer;
 
     public Habit() {}
 

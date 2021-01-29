@@ -1,7 +1,11 @@
 package com.capstone.habitbuilder.enjoyer;
 
+import com.capstone.habitbuilder.habit.Habit;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table
@@ -23,6 +27,11 @@ public class Enjoyer {
     private LocalDateTime createdDate;
     private LocalDateTime updatedDate;
 //    private Long chat-botId;   for later
+
+    // Setup one to many relationship with Habit
+    @OneToMany(mappedBy = "enjoyer")
+    private List<Habit> habits = new ArrayList<>();
+
 
     public Enjoyer() {}
 
