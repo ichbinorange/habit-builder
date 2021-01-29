@@ -3,11 +3,8 @@ package com.capstone.habitbuilder.habit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
 @RestController
-@RequestMapping(path="/habit")
+//@RequestMapping(path="/habit")
 public class HabitController {
     private final HabitService habitService;
 
@@ -17,26 +14,26 @@ public class HabitController {
     }
 
     // Index - need to change based on userId
-    @GetMapping
+    @GetMapping(path="/habit")
     public Iterable<Habit> getHabits() {
         return habitService.getHabits();
     }
 
     // Show
-    @GetMapping(path = "{habitId}")
+    @GetMapping(path = "/habit/{habitId}")
     public Habit showHabit(@PathVariable("habitId") Long habitId) {
         return habitService.showHabit(habitId);
     }
 
     // Create
-    @PostMapping(path = "{enjoyerId}")
+    @PostMapping(path = "/enjoyer/{enjoyerId}/habit")
     public void registerNewHabit(@RequestBody Habit habit,
                                  @PathVariable("enjoyerId") Long enjoyerId) {
-        habitService.addNewHabit(habit);
+        habitService.addNewHabit(habit, enjoyerId);
     }
 
     // Update
-    @PutMapping(path = "{habitId}")
+    @PutMapping(path = "/habit/{habitId}")
     public void updateStudent(
             @PathVariable("habitId") Long habitId,
             @RequestParam(required = false) String title,
@@ -49,7 +46,7 @@ public class HabitController {
     }
 
     // Delete
-    @DeleteMapping(path = "{habitId}")
+    @DeleteMapping(path = "/habit/{habitId}")
     public void deleteHabit(@PathVariable("habitId") Long habitId) {
         habitService.deleteHabit(habitId);
     }

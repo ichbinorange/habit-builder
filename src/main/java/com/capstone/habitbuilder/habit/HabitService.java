@@ -1,19 +1,21 @@
 package com.capstone.habitbuilder.habit;
 
+import com.capstone.habitbuilder.enjoyer.Enjoyer;
+import com.capstone.habitbuilder.enjoyer.EnjoyerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Service
 public class HabitService {
     private final HabitRepository habitRepository;
-
+    private final EnjoyerRepository enjoyerRepository;
     @Autowired
-    public HabitService(HabitRepository habitRepository) {
+    public HabitService(HabitRepository habitRepository, EnjoyerRepository enjoyerRepository) {
         this.habitRepository = habitRepository;
+        this.enjoyerRepository = enjoyerRepository;
     }
 
     // index - need to change based on userId
@@ -31,7 +33,12 @@ public class HabitService {
     }
 
     // Create
-    public void addNewHabit(Habit habit) {
+    public void addNewHabit(Habit habit, Long enjoyerId) {
+        Enjoyer enjoyer = enjoyerRepository.findById(enjoyerId)
+                .orElseThrow(() -> new IllegalStateException(
+                        "enjoyer with id " + enjoyerId + " does not exists"
+                ));
+        habit.setEnjoyer(enjoyer);
         habit.setCreatedDate(LocalDateTime.now());
         habit.setUpdatedDate(LocalDateTime.now());
         habitRepository.save(habit);
