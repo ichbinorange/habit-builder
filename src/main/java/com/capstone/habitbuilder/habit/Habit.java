@@ -18,7 +18,6 @@ public class Habit {
     @GeneratedValue(strategy = GenerationType.SEQUENCE,
             generator = "habit_sequence")
 
-//    private Long userId;   for to connect with User table
     private Long id;
     private String title;
     private String goal;
@@ -55,6 +54,14 @@ public class Habit {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Enjoyer getEnjoyer() {
+        return enjoyer;
+    }
+
+    public void setEnjoyer(Enjoyer enjoyer) {
+        this.enjoyer = enjoyer;
     }
 
     public String getTitle() {
@@ -117,6 +124,7 @@ public class Habit {
     public String toString() {
         return "Habit{" +
                 "id=" + id +
+                ", enjoyer='" + enjoyer + '\'' +
                 ", title='" + title + '\'' +
                 ", goal='" + goal + '\'' +
                 ", description='" + description + '\'' +

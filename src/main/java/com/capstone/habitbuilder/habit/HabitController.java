@@ -29,8 +29,9 @@ public class HabitController {
     }
 
     // Create
-    @PostMapping
-    public void registerNewHabit(@RequestBody Habit habit) {
+    @PostMapping(path = "{enjoyerId}")
+    public void registerNewHabit(@RequestBody Habit habit,
+                                 @PathVariable("enjoyerId") Long enjoyerId) {
         habitService.addNewHabit(habit);
     }
 
