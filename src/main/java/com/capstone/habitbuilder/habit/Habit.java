@@ -33,20 +33,15 @@ public class Habit {
                  String goal,
                  String description,
                  String streak,
-                 Boolean reminder,
-                 LocalDateTime createdDate,
-                 LocalDateTime updatedDate) {
+                 Boolean reminder) {
         this.title = title;
         this.goal = goal;
         this.description = description;
         this.streak = streak;
         this.reminder = reminder;
-        this.createdDate = createdDate;
-        this.updatedDate = updatedDate;
     }
 
     // Getter & Setter
-    // createdDate is can't change --> no setter
     public Long getId() {
         return id;
     }
@@ -97,6 +92,10 @@ public class Habit {
 
     public LocalDateTime getCreatedDate() {
         return createdDate;
+    }
+
+    public void setCreatedDate(LocalDateTime createdDate) {
+        this.createdDate = createdDate;
     }
 
     public LocalDateTime getUpdatedDate() {

@@ -30,21 +30,15 @@ public class User {
     public User(String name,
                 String email,
                 String photoUrl,
-                String about,
-                LocalDateTime createdDate,
-                LocalDateTime updatedDate) {
+                String about) {
         this.name = name;
         this.email = email;
         this.photoUrl = photoUrl;
         this.about = about;
-        this.createdDate = createdDate;
-        this.updatedDate = updatedDate;
     }
 //    Need to setup different options for user update
 
     // Getter & Setter
-    // email is from Google OAuth, can't change --> no setter
-    // createdDate is can't change --> no setter
     public Long getId() {
         return id;
     }
@@ -65,6 +59,10 @@ public class User {
         return email;
     }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getPhotoUrl() {
         return photoUrl;
     }
@@ -83,6 +81,10 @@ public class User {
 
     public LocalDateTime getCreatedDate() {
         return createdDate;
+    }
+
+    public void setCreatedDate(LocalDateTime createdDate) {
+        this.createdDate = createdDate;
     }
 
     public LocalDateTime getUpdatedDate() {

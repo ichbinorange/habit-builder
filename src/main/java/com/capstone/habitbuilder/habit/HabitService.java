@@ -32,6 +32,8 @@ public class HabitService {
 
     // Create
     public void addNewHabit(Habit habit) {
+        habit.setCreatedDate(LocalDateTime.now());
+        habit.setUpdatedDate(LocalDateTime.now());
         habitRepository.save(habit);
     }
 

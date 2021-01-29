@@ -37,6 +37,8 @@ public class UserService {
         if (userOptional.isPresent()) {
             throw new IllegalStateException("Email taken");
         }
+        user.setCreatedDate(LocalDateTime.now());
+        user.setUpdatedDate(LocalDateTime.now());
         userRepository.save(user);
     }
 
