@@ -1,4 +1,4 @@
-package com.capstone.habitbuilder.user;
+package com.capstone.habitbuilder.enjoyer;
 
 import com.capstone.habitbuilder.habit.HabitRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -8,11 +8,11 @@ import org.springframework.context.annotation.Configuration;
 import java.util.List;
 
 @Configuration
-public class UserConfig {
+public class EnjoyerConfig {
     @Bean
-    public CommandLineRunner userRunner(UserRepository repo) {
+    public CommandLineRunner enjoyerRunner(EnjoyerRepository repo) {
         return args -> {
-            User water = new User(
+            Enjoyer water = new Enjoyer(
                 "water",
                 "water@gmail.com",
                 "http://",

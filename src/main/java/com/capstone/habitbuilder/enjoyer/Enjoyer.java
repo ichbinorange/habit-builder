@@ -1,19 +1,19 @@
-package com.capstone.habitbuilder.user;
+package com.capstone.habitbuilder.enjoyer;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Table
-public class User {
+public class Enjoyer {
     @Id
     @SequenceGenerator(
-            name = "user_sequence",
-            sequenceName = "user_squence",
+            name = "enjoyer_sequence",
+            sequenceName = "enjoyer_squence",
             allocationSize = 1
     )
     @GeneratedValue(strategy = GenerationType.SEQUENCE,
-            generator = "user_sequence")
+            generator = "enjoyer_sequence")
 
     private Long id;
     private String name;
@@ -24,13 +24,13 @@ public class User {
     private LocalDateTime updatedDate;
 //    private Long chat-botId;   for later
 
-    public User() {}
+    public Enjoyer() {}
 
     // create a user account
-    public User(String name,
-                String email,
-                String photoUrl,
-                String about) {
+    public Enjoyer(String name,
+                   String email,
+                   String photoUrl,
+                   String about) {
         this.name = name;
         this.email = email;
         this.photoUrl = photoUrl;
@@ -97,7 +97,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
+        return "Enjoyer{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
