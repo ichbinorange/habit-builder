@@ -2,6 +2,7 @@ package com.capstone.habitbuilder.habit;
 
 
 import com.capstone.habitbuilder.enjoyer.Enjoyer;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -12,7 +13,7 @@ public class Habit {
     @Id
     @SequenceGenerator(
             name = "habit_sequence",
-            sequenceName = "habit_squence",
+            sequenceName = "habit_sequence",
             allocationSize = 1
     )
     @GeneratedValue(strategy = GenerationType.SEQUENCE,
@@ -28,18 +29,21 @@ public class Habit {
     private LocalDateTime updatedDate;
 
     // Setup many to one relationship with Enjoyer
-    @ManyToOne
-    @JoinColumn(name = "ENJOYER_ID", referencedColumnName = "ID" )
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @ManyToOne(targetEntity = Enjoyer.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "ENJOYER_ID", referencedColumnName = "ID")
     private Enjoyer enjoyer;
 
     public Habit() {}
 
     // create a new habit
-    public Habit(String title,
+    public Habit(Enjoyer enjoyer,
+                 String title,
                  String goal,
                  String description,
                  String streak,
                  Boolean reminder) {
+        this.enjoyer = enjoyer;
         this.title = title;
         this.goal = goal;
         this.description = description;
@@ -51,7 +55,6 @@ public class Habit {
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
@@ -59,7 +62,6 @@ public class Habit {
     public Enjoyer getEnjoyer() {
         return enjoyer;
     }
-
     public void setEnjoyer(Enjoyer enjoyer) {
         this.enjoyer = enjoyer;
     }
@@ -67,7 +69,6 @@ public class Habit {
     public String getTitle() {
         return title;
     }
-
     public void setTitle(String title) {
         this.title = title;
     }
@@ -75,7 +76,6 @@ public class Habit {
     public String getGoal() {
         return goal;
     }
-
     public void setGoal(String goal) {
         this.goal = goal;
     }
@@ -83,7 +83,6 @@ public class Habit {
     public String getDescription() {
         return description;
     }
-
     public void setDescription(String description) {
         this.description = description;
     }
@@ -91,7 +90,6 @@ public class Habit {
     public String getStreak() {
         return streak;
     }
-
     public void setStreak(String streak) {
         this.streak = streak;
     }
@@ -99,7 +97,6 @@ public class Habit {
     public Boolean getReminder() {
         return reminder;
     }
-
     public void setReminder(Boolean reminder) {
         this.reminder = reminder;
     }
@@ -107,7 +104,6 @@ public class Habit {
     public LocalDateTime getCreatedDate() {
         return createdDate;
     }
-
     public void setCreatedDate(LocalDateTime createdDate) {
         this.createdDate = createdDate;
     }
@@ -115,7 +111,6 @@ public class Habit {
     public LocalDateTime getUpdatedDate() {
         return updatedDate;
     }
-
     public void setUpdatedDate(LocalDateTime updatedDate) {
         this.updatedDate = updatedDate;
     }

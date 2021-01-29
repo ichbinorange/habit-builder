@@ -13,7 +13,7 @@ public class Enjoyer {
     @Id
     @SequenceGenerator(
             name = "enjoyer_sequence",
-            sequenceName = "enjoyer_squence",
+            sequenceName = "enjoyer_sequence",
             allocationSize = 1
     )
     @GeneratedValue(strategy = GenerationType.SEQUENCE,
@@ -29,9 +29,8 @@ public class Enjoyer {
 //    private Long chat-botId;   for later
 
     // Setup one to many relationship with Habit
-    @OneToMany(mappedBy = "enjoyer")
+    @OneToMany(targetEntity = Habit.class, cascade = CascadeType.ALL , fetch = FetchType.LAZY, mappedBy = "enjoyer")
     private List<Habit> habits = new ArrayList<>();
-
 
     public Enjoyer() {}
 
@@ -45,6 +44,7 @@ public class Enjoyer {
         this.photoUrl = photoUrl;
         this.about = about;
     }
+
 //    Need to setup different options for user update
 
     // Getter & Setter
