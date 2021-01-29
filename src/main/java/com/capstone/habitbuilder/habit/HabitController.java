@@ -3,6 +3,8 @@ package com.capstone.habitbuilder.habit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+
 @RestController
 @RequestMapping(path="/habit")
 public class HabitController {
@@ -13,7 +15,7 @@ public class HabitController {
         this.habitService = habitService;
     }
 
-    // Index
+    // Index - need to change based on userId
     @GetMapping
     public Iterable<Habit> getHabits() {
         return habitService.getHabits();
@@ -22,22 +24,15 @@ public class HabitController {
     // Show
     @GetMapping(path = "{habitId}")
     public void showHabit(
-        @PathVariable("habitId") Long habitId,
-        @RequestParam(required = false) String title,
-        @RequestParam(required = false) String goal,
-        @RequestParam(required = false) String description,
-        @RequestParam(required = false) String streak,
-        @RequestParam(required = false) String reminder,
-        @RequestParam(required = false) String createdDate,
-        @RequestParam(required = false) String updatedDate) {
+        @PathVariable("habitId") Long habitId) {
 
-        habitService.showHabit(habitId, title, goal, description, streak, reminder, createdDate, updatedDate);
+        habitService.showHabit(habitId);
     }
 
     // Create
     @PostMapping
     public void registerNewHabit(@RequestBody Habit habit) {
-        HabitService.addNewHabit(habit);
+        habitService.addNewHabit(habit);
     }
 
     // Update
@@ -48,11 +43,9 @@ public class HabitController {
             @RequestParam(required = false) String goal,
             @RequestParam(required = false) String description,
             @RequestParam(required = false) String streak,
-            @RequestParam(required = false) String reminder,
-            @RequestParam(required = false) String createdDate,
-            @RequestParam(required = false) String updatedDate) {
+            @RequestParam(required = false) Boolean reminder) {
 
-        habitService.updateHabit(habitId, title, goal, description, streak, reminder, createdDate, updatedDate);
+        habitService.updateHabit(habitId, title, goal, description, streak, reminder);
     }
 
     // Delete

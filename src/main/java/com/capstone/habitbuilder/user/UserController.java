@@ -13,7 +13,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    // Index
+    // Index - need to delete due to not necessary for user
     @GetMapping
     public Iterable<User> getUsers() {
         return userService.getUsers();
@@ -22,21 +22,15 @@ public class UserController {
     // Show
     @GetMapping(path = "{userId}")
     public void showUser(
-            @PathVariable("userId") Long userId,
-            @RequestParam(required = false) String name,
-            @RequestParam(required = false) String email,
-            @RequestParam(required = false) String photoUrl,
-            @RequestParam(required = false) String about,
-            @RequestParam(required = false) String createdDate,
-            @RequestParam(required = false) String updatedDate) {
+            @PathVariable("userId") Long userId) {
 
-        userService.showUser(userId, name, email, photoUrl, about, createdDate, updatedDate);
+        userService.showUser(userId);
     }
 
     // Create
     @PostMapping
     public void registerNewUser(@RequestBody User user) {
-        UserService.addNewUser(user);
+        userService.addNewUser(user);
     }
 
     // Update
@@ -44,13 +38,10 @@ public class UserController {
     public void updateUser(
             @PathVariable("userId") Long userId,
             @RequestParam(required = false) String name,
-            @RequestParam(required = false) String email,
             @RequestParam(required = false) String photoUrl,
-            @RequestParam(required = false) String about,
-            @RequestParam(required = false) String createdDate,
-            @RequestParam(required = false) String updatedDate {
+            @RequestParam(required = false) String about) {
 
-        userService.updateUser(userId, name, email, photoUrl, about, createdDate, updatedDate);
+        userService.updateUser(userId, name, photoUrl, about);
     }
 
     // Delete
