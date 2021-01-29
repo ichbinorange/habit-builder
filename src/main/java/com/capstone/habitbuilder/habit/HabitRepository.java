@@ -1,4 +1,11 @@
 package com.capstone.habitbuilder.habit;
 
-public class HabitRepository {
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
+
+@Repository
+public interface HabitRepository extends CrudRepository<Habit, Long> {
+
 }

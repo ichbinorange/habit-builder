@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @RestController
 @RequestMapping(path="/habit")
@@ -23,10 +24,8 @@ public class HabitController {
 
     // Show
     @GetMapping(path = "{habitId}")
-    public void showHabit(
-        @PathVariable("habitId") Long habitId) {
-
-        habitService.showHabit(habitId);
+    public Habit showHabit(@PathVariable("habitId") Long habitId) {
+        return habitService.showHabit(habitId);
     }
 
     // Create

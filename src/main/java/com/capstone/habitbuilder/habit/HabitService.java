@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class HabitService {
@@ -21,12 +22,12 @@ public class HabitService {
     }
 
     // show
-    public void showHabit(Long habitId)  {
+    public Habit showHabit(Long habitId)  {
         Habit habit = habitRepository.findById(habitId)
                 .orElseThrow(() -> new IllegalStateException(
                         "habit with id " + habitId + " does not exists"
                 ));
-        habitRepository.findById(habitId);
+        return habit;
     }
 
     // Create

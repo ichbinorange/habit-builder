@@ -1,7 +1,5 @@
 package com.capstone.habitbuilder.user;
 
-import com.capstone.habitbuilder.habit.Habit;
-import com.capstone.habitbuilder.habit.HabitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,12 +23,12 @@ public class UserService {
     }
 
     // show
-    public void showUser(Long userId)  {
-        Habit user = userRepository.findById(userId)
+    public User showUser(Long userId)  {
+        User user = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalStateException(
-                        "user with id " + usertId + " does not exists"
+                        "user with id " + userId + " does not exists"
                 ));
-        return userRepository.findById(userId);
+        return user;
     }
 
     // Create

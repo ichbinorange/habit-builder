@@ -21,10 +21,8 @@ public class UserController {
 
     // Show
     @GetMapping(path = "{userId}")
-    public void showUser(
-            @PathVariable("userId") Long userId) {
-
-        userService.showUser(userId);
+    public User showUser(@PathVariable("userId") Long userId) {
+        return userService.showUser(userId);
     }
 
     // Create
