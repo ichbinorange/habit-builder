@@ -35,10 +35,10 @@ public class HabitTrackerController {
     @PutMapping(path = "/habitTracker/{habitTrackerId}")
     public void updateHabitTracker(
             @PathVariable("habitTrackerId") Long habitTrackerId,
-            @RequestParam(required = false) Boolean check,
+            @RequestParam(required = false) Boolean record,
             @RequestParam(required = false) String memo) {
 
-        habitTrackerService.updateHabitTracker(habitTrackerId, check, memo);
+        habitTrackerService.updateHabitTracker(habitTrackerId, record, memo);
     }
 
     // Delete

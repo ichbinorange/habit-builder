@@ -11,6 +11,7 @@ import java.util.List;
 @Configuration
 public class HabitTrackerConfig {
     private final HabitService habitService;
+    
     @Autowired
     public HabitTrackerConfig(HabitService habitService) {
         this.habitService = habitService;

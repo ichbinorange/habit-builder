@@ -70,5 +70,4 @@ public class HabitTrackerService {
         }
         habitTrackerRepository.deleteById(habitTrackerId);
     }
-
 }
