@@ -15,7 +15,7 @@ public class HabitService {
         this.habitRepository = habitRepository;
         this.enjoyerRepository = enjoyerRepository;
     }
-
+    
     // index - need to change based on userId
     public Iterable<Habit> getHabits() {
         return habitRepository.findAll();

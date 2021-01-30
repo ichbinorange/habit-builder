@@ -2,6 +2,7 @@ package com.capstone.habitbuilder.habit;
 
 import com.capstone.habitbuilder.Auditable;
 import com.capstone.habitbuilder.enjoyer.Enjoyer;
+import com.capstone.habitbuilder.habittracker.HabitTracker;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -9,6 +10,8 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Setter(AccessLevel.PUBLIC)
 @Getter(AccessLevel.PUBLIC)
@@ -37,6 +40,11 @@ public class Habit extends Auditable<String> {
     @ManyToOne(targetEntity = Enjoyer.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "ENJOYER_ID", referencedColumnName = "ID")
     private Enjoyer enjoyer;
+
+    // Setup one to many relationship with HabitTracker
+    @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE)
+    @OneToMany(targetEntity = HabitTracker.class, cascade = CascadeType.ALL , fetch = FetchType.LAZY, mappedBy = "habit")
+    private List<HabitTracker> habitTrackers = new ArrayList<>();
 
     public Habit() {}
 

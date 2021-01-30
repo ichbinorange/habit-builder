@@ -34,7 +34,7 @@ public class HabitController {
 
     // Update
     @PutMapping(path = "/habit/{habitId}")
-    public void updateStudent(
+    public void updateHabit(
             @PathVariable("habitId") Long habitId,
             @RequestParam(required = false) String title,
             @RequestParam(required = false) String goal,
