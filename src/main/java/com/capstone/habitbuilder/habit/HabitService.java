@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
-
 @Service
 public class HabitService {
     private final HabitRepository habitRepository;
@@ -39,8 +37,6 @@ public class HabitService {
                         "enjoyer with id " + enjoyerId + " does not exists"
                 ));
         habit.setEnjoyer(enjoyer);
-        habit.setCreatedDate(LocalDateTime.now());
-        habit.setUpdatedDate(LocalDateTime.now());
         habitRepository.save(habit);
     }
 
@@ -70,7 +66,6 @@ public class HabitService {
         }
 
         habit.setReminder(reminder);
-        habit.setUpdatedDate(LocalDateTime.now());
         habitRepository.save(habit);
     }
 

@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -37,17 +36,15 @@ public class EnjoyerService {
         if (enjoyerOptional.isPresent()) {
             throw new IllegalStateException("Email taken");
         }
-        enjoyer.setCreatedDate(LocalDateTime.now());
-        enjoyer.setUpdatedDate(LocalDateTime.now());
         enjoyerRepository.save(enjoyer);
     }
 
     // Update
     @Transactional
     public void updateEnjoyer(Long enjoyerId,
-                           String name,
-                            String photoUrl,
-                            String about) {
+                              String name,
+                              String photoUrl,
+                              String about) {
         Enjoyer enjoyer = enjoyerRepository.findById(enjoyerId)
                 .orElseThrow(() -> new IllegalStateException(
                         "enjoyer with id " + enjoyerId + " does not exists"
@@ -59,7 +56,6 @@ public class EnjoyerService {
             enjoyer.setAbout(about);
         }
         enjoyer.setPhotoUrl(photoUrl);
-        enjoyer.setUpdatedDate(LocalDateTime.now());
         enjoyerRepository.save(enjoyer);
     }
 

@@ -1,5 +1,6 @@
 package com.capstone.habitbuilder.enjoyer;
 
+import com.capstone.habitbuilder.Auditable;
 import com.capstone.habitbuilder.habit.Habit;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -7,7 +8,6 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +16,7 @@ import java.util.List;
 @ToString
 @Entity
 @Table
-public class Enjoyer {
+public class Enjoyer extends Auditable<String> {
     @Id
     @SequenceGenerator(
             name = "enjoyer_sequence",
@@ -26,14 +26,12 @@ public class Enjoyer {
     @GeneratedValue(strategy = GenerationType.SEQUENCE,
             generator = "enjoyer_sequence")
 
+    //    private Long chat-botId;   for later
     private Long id;
     private String name;
     private String email;
     private String photoUrl;
     private String about;
-    private LocalDateTime createdDate;
-    private LocalDateTime updatedDate;
-//    private Long chat-botId;   for later
 
     // Setup one to many relationship with Habit
     @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE)
@@ -41,6 +39,8 @@ public class Enjoyer {
     private List<Habit> habits = new ArrayList<>();
 
     public Enjoyer() {}
+
+    //    Need to setup different options for user update
 
     // create a user account
     public Enjoyer(String name,
@@ -52,7 +52,4 @@ public class Enjoyer {
         this.photoUrl = photoUrl;
         this.about = about;
     }
-
-//    Need to setup different options for user update
-
 }

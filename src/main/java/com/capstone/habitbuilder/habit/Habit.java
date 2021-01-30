@@ -1,6 +1,6 @@
 package com.capstone.habitbuilder.habit;
 
-
+import com.capstone.habitbuilder.Auditable;
 import com.capstone.habitbuilder.enjoyer.Enjoyer;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AccessLevel;
@@ -9,14 +9,13 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Setter(AccessLevel.PUBLIC)
 @Getter(AccessLevel.PUBLIC)
 @ToString
 @Entity
 @Table
-public class Habit {
+public class Habit extends Auditable<String> {
     @Id
     @SequenceGenerator(
             name = "habit_sequence",
@@ -32,8 +31,6 @@ public class Habit {
     private String description;
     private String streak;
     private Boolean reminder;
-    private LocalDateTime createdDate;
-    private LocalDateTime updatedDate;
 
     // Setup many to one relationship with Enjoyer
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -42,6 +39,8 @@ public class Habit {
     private Enjoyer enjoyer;
 
     public Habit() {}
+
+    //    Need to setup different options for user update
 
     // create a new habit
     public Habit(Enjoyer enjoyer,
