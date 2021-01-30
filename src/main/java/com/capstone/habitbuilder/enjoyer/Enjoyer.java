@@ -1,12 +1,19 @@
 package com.capstone.habitbuilder.enjoyer;
 
 import com.capstone.habitbuilder.habit.Habit;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@Setter(AccessLevel.PUBLIC)
+@Getter(AccessLevel.PUBLIC)
+@ToString
 @Entity
 @Table
 public class Enjoyer {
@@ -29,6 +36,7 @@ public class Enjoyer {
 //    private Long chat-botId;   for later
 
     // Setup one to many relationship with Habit
+    @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE)
     @OneToMany(targetEntity = Habit.class, cascade = CascadeType.ALL , fetch = FetchType.LAZY, mappedBy = "enjoyer")
     private List<Habit> habits = new ArrayList<>();
 
@@ -47,73 +55,4 @@ public class Enjoyer {
 
 //    Need to setup different options for user update
 
-    // Getter & Setter
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPhotoUrl() {
-        return photoUrl;
-    }
-
-    public void setPhotoUrl(String photoUrl) {
-        this.photoUrl = photoUrl;
-    }
-
-    public String getAbout() {
-        return about;
-    }
-
-    public void setAbout(String about) {
-        this.about = about;
-    }
-
-    public LocalDateTime getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(LocalDateTime createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public LocalDateTime getUpdatedDate() {
-        return updatedDate;
-    }
-
-    public void setUpdatedDate(LocalDateTime updatedDate) {
-        this.updatedDate = updatedDate;
-    }
-
-    @Override
-    public String toString() {
-        return "Enjoyer{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", photoUrl='" + photoUrl + '\'' +
-                ", about='" + about + '\'' +
-                ", createdDate='" + createdDate + '\'' +
-                ", updatedDate=" + updatedDate +
-                '}';
-    }
 }

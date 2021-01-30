@@ -3,10 +3,17 @@ package com.capstone.habitbuilder.habit;
 
 import com.capstone.habitbuilder.enjoyer.Enjoyer;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@Setter(AccessLevel.PUBLIC)
+@Getter(AccessLevel.PUBLIC)
+@ToString
 @Entity
 @Table
 public class Habit {
@@ -49,84 +56,5 @@ public class Habit {
         this.description = description;
         this.streak = streak;
         this.reminder = reminder;
-    }
-
-    // Getter & Setter
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Enjoyer getEnjoyer() {
-        return enjoyer;
-    }
-    public void setEnjoyer(Enjoyer enjoyer) {
-        this.enjoyer = enjoyer;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getGoal() {
-        return goal;
-    }
-    public void setGoal(String goal) {
-        this.goal = goal;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getStreak() {
-        return streak;
-    }
-    public void setStreak(String streak) {
-        this.streak = streak;
-    }
-
-    public Boolean getReminder() {
-        return reminder;
-    }
-    public void setReminder(Boolean reminder) {
-        this.reminder = reminder;
-    }
-
-    public LocalDateTime getCreatedDate() {
-        return createdDate;
-    }
-    public void setCreatedDate(LocalDateTime createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public LocalDateTime getUpdatedDate() {
-        return updatedDate;
-    }
-    public void setUpdatedDate(LocalDateTime updatedDate) {
-        this.updatedDate = updatedDate;
-    }
-
-    @Override
-    public String toString() {
-        return "Habit{" +
-                "id=" + id +
-                ", enjoyer='" + enjoyer + '\'' +
-                ", title='" + title + '\'' +
-                ", goal='" + goal + '\'' +
-                ", description='" + description + '\'' +
-                ", streak='" + streak + '\'' +
-                ", reminder='" + reminder + '\'' +
-                ", createdDate='" + createdDate + '\'' +
-                ", updatedDate=" + updatedDate +
-                '}';
     }
 }
