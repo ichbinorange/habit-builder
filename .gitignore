@@ -35,3 +35,6 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### hide api secret
+gradle.properties
