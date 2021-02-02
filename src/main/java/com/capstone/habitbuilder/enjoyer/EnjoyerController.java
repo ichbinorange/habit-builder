@@ -1,22 +1,31 @@
 package com.capstone.habitbuilder.enjoyer;
 
+import com.capstone.habitbuilder.oauthapi.ResourceNotFoundException;
+import com.capstone.habitbuilder.security.CurrentUser;
+import com.capstone.habitbuilder.security.UserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path="/enjoyer")
 public class EnjoyerController {
     private final EnjoyerService enjoyerService;
+    private final EnjoyerRepository enjoyerRepository;
 
     @Autowired
-    public EnjoyerController(EnjoyerService enjoyerService) {
+    public EnjoyerController(EnjoyerService enjoyerService, EnjoyerRepository enjoyerRepository) {
         this.enjoyerService = enjoyerService;
+        this.enjoyerRepository = enjoyerRepository;
     }
 
+
     // Index - need to delete due to not necessary for enjoyer
-    @GetMapping
-    public Iterable<Enjoyer> getEnjoyers() {
-        return enjoyerService.getEnjoyers();
+    @GetMapping("/user/me")
+    @PreAuthorize("hasRole('USER')")
+    public Enjoyer getCurrentUser(@CurrentUser UserPrincipal userPrincipal) {
+        return enjoyerRepository.findById(userPrincipal.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("User", "id", userPrincipal.getId()));
     }
 
     // Show

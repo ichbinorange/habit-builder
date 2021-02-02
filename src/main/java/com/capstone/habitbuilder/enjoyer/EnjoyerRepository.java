@@ -8,4 +8,5 @@ import java.util.Optional;
 @Repository
 public interface EnjoyerRepository extends CrudRepository<Enjoyer, Long> {
     Optional<Enjoyer> findEnjoyerByEmail(String email);
+    Boolean existsByEmail(String email);
 }

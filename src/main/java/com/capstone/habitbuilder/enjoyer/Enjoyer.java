@@ -3,6 +3,9 @@ package com.capstone.habitbuilder.enjoyer;
 import com.capstone.habitbuilder.Auditable;
 import com.capstone.habitbuilder.friendship.Friendship;
 import com.capstone.habitbuilder.habit.Habit;
+import com.capstone.habitbuilder.oauthapi.AuthProvider;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sun.istack.NotNull;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,11 +34,19 @@ public class Enjoyer extends Auditable<String> {
 
     //    private Long chat-botId;   for later
     private Long id;
+    @Column(nullable = false)
     private String name;
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String email;
+    @JsonIgnore
+    private String password;
     private String photoUrl;
     private String about;
+
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private AuthProvider provider;
+    private String providerId;
 
     // Setup one to many relationship with Habit
     @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE)
