@@ -21,11 +21,11 @@ public class EnjoyerController {
 
 
     // Index - need to delete due to not necessary for enjoyer
-    @GetMapping("/user/me")
-    @PreAuthorize("hasRole('USER')")
+    @GetMapping("/me")
+    @PreAuthorize("hasRole('ENJOYER')")
     public Enjoyer getCurrentUser(@CurrentUser UserPrincipal userPrincipal) {
         return enjoyerRepository.findById(userPrincipal.getId())
-                .orElseThrow(() -> new ResourceNotFoundException("User", "id", userPrincipal.getId()));
+                .orElseThrow(() -> new ResourceNotFoundException("Enjoyer", "id", userPrincipal.getId()));
     }
 
     // Show

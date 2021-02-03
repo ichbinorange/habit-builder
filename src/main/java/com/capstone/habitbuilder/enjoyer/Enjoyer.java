@@ -20,7 +20,7 @@ import java.util.Set;
 @Setter(AccessLevel.PUBLIC)
 @Getter(AccessLevel.PUBLIC)
 @ToString
-@Entity
+@Entity(name = "Enjoyer")
 @Table
 public class Enjoyer extends Auditable<String> {
     @Id
