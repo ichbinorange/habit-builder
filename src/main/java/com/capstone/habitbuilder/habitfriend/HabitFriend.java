@@ -36,6 +36,7 @@ public class HabitFriend extends Auditable<String> {
 
     // Friend and habit relation setup?
 
+    public HabitFriend() {}
     // create a new habitFriend
     public HabitFriend(Habit habit,
                        Boolean liked) {

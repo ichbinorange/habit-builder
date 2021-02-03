@@ -36,6 +36,7 @@ public class HabitMsg extends Auditable<String> {
 
     // Friend and habitMsg relation setup?
 
+    public HabitMsg() {}
     // create a new habitMsg
     public HabitMsg(Habit habit,
                     String text) {

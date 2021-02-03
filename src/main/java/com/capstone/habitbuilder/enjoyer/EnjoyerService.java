@@ -43,7 +43,7 @@ public class EnjoyerService {
     @Transactional
     public void updateEnjoyer(Long enjoyerId,
                               String name,
-                              String photoUrl,
+                              String imageUrl,
                               String about) {
         Enjoyer enjoyer = enjoyerRepository.findById(enjoyerId)
                 .orElseThrow(() -> new IllegalStateException(
@@ -55,7 +55,7 @@ public class EnjoyerService {
         if (about != null && about.length() > 0 ) {
             enjoyer.setAbout(about);
         }
-        enjoyer.setPhotoUrl(photoUrl);
+        enjoyer.setImageUrl(imageUrl);
         enjoyerRepository.save(enjoyer);
     }
 

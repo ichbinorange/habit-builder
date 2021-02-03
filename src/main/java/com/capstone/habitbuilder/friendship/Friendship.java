@@ -31,4 +31,8 @@ public class Friendship {
 
     public Friendship() {}
 
+    public Friendship(Boolean activated) {
+        this.activated = activated;
+    }
+
 }

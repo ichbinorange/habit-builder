@@ -34,13 +34,21 @@ public class Enjoyer extends Auditable<String> {
 
     //    private Long chat-botId;   for later
     private Long id;
+
     @Column(nullable = false)
     private String name;
+
     @Column(unique = true, nullable = false)
     private String email;
+
     @JsonIgnore
     private String password;
-    private String photoUrl;
+
+    private String imageUrl;
+
+    @Column(nullable = false)
+    private Boolean emailVerified = false;
+
     private String about;
 
     @NotNull
@@ -69,11 +77,11 @@ public class Enjoyer extends Auditable<String> {
     // create a user account
     public Enjoyer(String name,
                    String email,
-                   String photoUrl,
+                   String imageUrl,
                    String about) {
         this.name = name;
         this.email = email;
-        this.photoUrl = photoUrl;
+        this.imageUrl = imageUrl;
         this.about = about;
     }
 }
