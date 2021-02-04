@@ -47,7 +47,8 @@ public class HabitService {
                             String goal,
                             String description,
                             String streak,
-                            Boolean reminder) {
+                            Boolean reminder,
+                            Boolean habitBuilt) {
         Habit habit = habitRepository.findById(habitId)
                 .orElseThrow(() -> new IllegalStateException(
                         "habit with id " + habitId + " does not exists"
@@ -66,6 +67,7 @@ public class HabitService {
         }
 
         habit.setReminder(reminder);
+        habit.setHabitBuilt(habitBuilt);
         habitRepository.save(habit);
     }
 

@@ -40,9 +40,10 @@ public class HabitController {
             @RequestParam(required = false) String goal,
             @RequestParam(required = false) String description,
             @RequestParam(required = false) String streak,
-            @RequestParam(required = false) Boolean reminder) {
+            @RequestParam(required = false) Boolean reminder,
+            @RequestParam(required = false) Boolean habitBuilt) {
 
-        habitService.updateHabit(habitId, title, goal, description, streak, reminder);
+        habitService.updateHabit(habitId, title, goal, description, streak, reminder, habitBuilt);
     }
 
     // Delete
