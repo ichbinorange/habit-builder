@@ -13,7 +13,7 @@ public class HabitFriendController {
     }
 
     // Index - need to change based on userId
-    @GetMapping(path="/habitFriend")
+    @GetMapping(path="/habitFriends")
     public Iterable<HabitFriend> getHabitFriends() {
         return habitFriendService.getHabitFriends();
     }

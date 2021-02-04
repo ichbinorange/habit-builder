@@ -20,14 +20,14 @@ public class HabitTrackerConfig {
     @Bean
     public CommandLineRunner habitTrackerRunner(HabitTrackerRepository repo) {
         return args -> {
-            HabitTracker drinkWater = new HabitTracker(
-                    habitService.showHabit(1L),
-                    true,
-                    "1L in the morning and 2L in the afternoon"
-            );
-            repo.saveAll(
-                    List.of(drinkWater)
-            );
+//            HabitTracker drinkWater = new HabitTracker(
+//                    habitService.showHabit(1L),
+//                    true,
+//                    "1L in the morning and 2L in the afternoon"
+//            );
+//            repo.saveAll(
+//                    List.of(drinkWater)
+//            );
         };
     }
 }

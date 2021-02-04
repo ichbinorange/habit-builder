@@ -20,13 +20,13 @@ public class HabitFriendConfig {
     @Bean
     public CommandLineRunner habitFriendRunner(HabitFriendRepository repo) {
         return args -> {
-            HabitFriend drinkWater = new HabitFriend(
-                    habitService.showHabit(1L),
-                    true
-            );
-            repo.saveAll(
-                List.of(drinkWater)
-            );
+//            HabitFriend drinkWater = new HabitFriend(
+//                    habitService.showHabit(1L),
+//                    true
+//            );
+//            repo.saveAll(
+//                List.of(drinkWater)
+//            );
         };
     }
 }

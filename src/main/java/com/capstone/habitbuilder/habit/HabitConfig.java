@@ -20,17 +20,18 @@ public class HabitConfig {
     @Bean
     public CommandLineRunner habitRunner(HabitRepository repo) {
         return args -> {
-            Habit drinkWater = new Habit(
-                    enjoyerService.showEnjoyer(1L),
-                    "drink water",
-                    "drink 2L everyday",
-                    "1L in the morning and 2L in the afternoon",
-                    "daily",
-                    true
-            );
-            repo.saveAll(
-                    List.of(drinkWater)
-            );
+//            Habit drinkWater = new Habit(
+//                    enjoyerService.showEnjoyer(1L),
+//                    "drink water",
+//                    "drink 2L everyday",
+//                    "1L in the morning and 2L in the afternoon",
+//                    "1L in the morning and 2L in the afternoon",
+//                    "daily",
+//                    true
+//            );
+//            repo.saveAll(
+//                    List.of(drinkWater)
+//            );
         };
     }
 }

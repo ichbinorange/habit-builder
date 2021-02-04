@@ -14,7 +14,7 @@ public class HabitController {
     }
 
     // Index - need to change based on userId
-    @GetMapping(path="/habit")
+    @GetMapping(path="/habits")
     public Iterable<Habit> getHabits() {
         return habitService.getHabits();
     }

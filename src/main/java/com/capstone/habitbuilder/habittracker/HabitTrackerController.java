@@ -13,7 +13,7 @@ public class HabitTrackerController {
     }
 
     // Index - need to change based on userId
-    @GetMapping(path="/habitTracker")
+    @GetMapping(path="/habitTrackers")
     public Iterable<HabitTracker> getHabitTrackers() {
         return habitTrackerService.getHabitTrackers();
     }

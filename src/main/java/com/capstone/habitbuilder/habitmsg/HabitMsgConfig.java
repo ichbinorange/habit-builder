@@ -20,13 +20,13 @@ public class HabitMsgConfig {
     @Bean
     public CommandLineRunner habitMsgRunner(HabitMsgRepository repo) {
         return args -> {
-            HabitMsg drinkWater = new HabitMsg(
-                    habitService.showHabit(1L),
-                    "1L in the morning and 2L in the afternoon"
-            );
-            repo.saveAll(
-                List.of(drinkWater)
-            );
+//            HabitMsg drinkWater = new HabitMsg(
+//                    habitService.showHabit(1L),
+//                    "1L in the morning and 2L in the afternoon"
+//            );
+//            repo.saveAll(
+//                List.of(drinkWater)
+//            );
         };
     }
 }
