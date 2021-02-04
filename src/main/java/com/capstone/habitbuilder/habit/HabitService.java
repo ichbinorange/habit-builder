@@ -17,8 +17,8 @@ public class HabitService {
     }
     
     // index - need to change based on userId
-    public Iterable<Habit> getHabits() {
-        return habitRepository.findAll();
+    public Iterable<Habit> getHabits(Long enjoyerId) {
+        return habitRepository.findByEnjoyerId(enjoyerId);
     }
 
     // show
