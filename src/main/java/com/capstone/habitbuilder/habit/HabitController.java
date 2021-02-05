@@ -1,10 +1,10 @@
 package com.capstone.habitbuilder.habit;
 
+import com.capstone.habitbuilder.enjoyer.EnjoyerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-//@RequestMapping(path="/habit")
 public class HabitController {
     private final HabitService habitService;
 
@@ -29,26 +29,19 @@ public class HabitController {
     @PostMapping(path = "/enjoyer/{enjoyerId}/habit")
     public void registerNewHabit(@RequestBody Habit habit,
                                  @PathVariable("enjoyerId") Long enjoyerId) {
-        habitService.addNewHabit(habit, enjoyerId);
+            habitService.addNewHabit(habit, enjoyerId);
     }
 
     // Update
     @PutMapping(path = "/habit/{habitId}")
-    public void updateHabit(
-            @PathVariable("habitId") Long habitId,
-            @RequestParam(required = false) String title,
-            @RequestParam(required = false) String goal,
-            @RequestParam(required = false) String description,
-            @RequestParam(required = false) String streak,
-            @RequestParam(required = false) Boolean reminder,
-            @RequestParam(required = false) Boolean habitBuilt) {
-
-        habitService.updateHabit(habitId, title, goal, description, streak, reminder, habitBuilt);
+    public void updateHabit(@PathVariable("habitId") Long habitId,
+            @RequestBody Habit habit) {
+            habitService.updateHabit(habitId, habit);
     }
 
     // Delete
     @DeleteMapping(path = "/habit/{habitId}")
     public void deleteHabit(@PathVariable("habitId") Long habitId) {
-        habitService.deleteHabit(habitId);
+            habitService.deleteHabit(habitId);
     }
 }
