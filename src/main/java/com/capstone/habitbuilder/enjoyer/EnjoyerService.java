@@ -1,5 +1,6 @@
 package com.capstone.habitbuilder.enjoyer;
 
+import com.capstone.habitbuilder.habit.HabitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,15 +11,12 @@ import java.util.Optional;
 @Service
 public class EnjoyerService {
     private final EnjoyerRepository enjoyerRepository;
+    private final HabitService habitService;
 
     @Autowired
-    public EnjoyerService(EnjoyerRepository enjoyerRepository) {
+    public EnjoyerService(EnjoyerRepository enjoyerRepository, HabitService habitService) {
         this.enjoyerRepository = enjoyerRepository;
-    }
-
-    // index - need to delete due to not necessary for enjoyer
-    public Iterable<Enjoyer> getEnjoyers() {
-        return enjoyerRepository.findAll();
+        this.habitService = habitService;
     }
 
     // show
@@ -30,42 +28,43 @@ public class EnjoyerService {
         return enjoyer;
     }
 
-    // Create
-    public void addNewEnjoyer(Enjoyer enjoyer) {
-        Optional<Enjoyer> enjoyerOptional = enjoyerRepository.findEnjoyerByEmail(enjoyer.getEmail());
-        if (enjoyerOptional.isPresent()) {
-            throw new IllegalStateException("Email taken");
-        }
-        enjoyerRepository.save(enjoyer);
-    }
-
     // Update
     @Transactional
-    public void updateEnjoyer(Long enjoyerId,
-                              String name,
-                              String imageUrl,
-                              String about) {
-        Enjoyer enjoyer = enjoyerRepository.findById(enjoyerId)
+    public void updateEnjoyer(Long enjoyerId, Enjoyer enjoyer) {
+        Enjoyer checkEnjoyer = enjoyerRepository.findById(enjoyerId)
                 .orElseThrow(() -> new IllegalStateException(
                         "enjoyer with id " + enjoyerId + " does not exists"
                 ));
-        if (name != null && name.length() > 0 && !Objects.equals(enjoyer.getName(), name)) {
-            enjoyer.setName(name);
+
+        if (checkEnjoyer.getEmail().equals(habitService.authenticateUser())) {
+            if (enjoyer.getName() != null && enjoyer.getName().length() > 0) {
+                enjoyer.setName(enjoyer.getName());
+            }
+            if (enjoyer.getAbout() != null && enjoyer.getAbout().length() > 0) {
+                enjoyer.setAbout(enjoyer.getAbout());
+            }
+            if (enjoyer.getImageUrl() != null && enjoyer.getImageUrl().length() > 0) {
+                enjoyer.setImageUrl(enjoyer.getImageUrl());
+            }
+            enjoyerRepository.save(enjoyer);
+        } else {
+            throw new IllegalStateException(
+                "EnjoyerId" + enjoyerId + " is not equal to Authenticated enjoyerId" + habitService.authenticateUser());
         }
-        if (about != null && about.length() > 0 ) {
-            enjoyer.setAbout(about);
-        }
-        enjoyer.setImageUrl(imageUrl);
-        enjoyerRepository.save(enjoyer);
+
     }
 
     // Delete
     public void deleteEnjoyer(Long enjoyerId) {
-        boolean exists = enjoyerRepository.existsById(enjoyerId);
-        if (!exists) {
+        Enjoyer checkEnjoyer = enjoyerRepository.findById(enjoyerId)
+                .orElseThrow(() -> new IllegalStateException(
+                        "enjoyer with id " + enjoyerId + " does not exists"
+                ));
+        if (checkEnjoyer.getEmail().equals(habitService.authenticateUser())) {
+            enjoyerRepository.deleteById(enjoyerId);
+        } else {
             throw new IllegalStateException(
-                    "enjoyer with id " + enjoyerId + " does not exists");
+                    "EnjoyerId" + enjoyerId + " is not equal to Authenticated enjoyerId" + habitService.authenticateUser());
         }
-        enjoyerRepository.deleteById(enjoyerId);
     }
 }
