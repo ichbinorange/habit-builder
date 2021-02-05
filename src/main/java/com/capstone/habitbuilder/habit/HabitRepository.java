@@ -10,4 +10,5 @@ import java.util.Optional;
 @Repository
 public interface HabitRepository extends JpaRepository<Habit, Long> {
     ArrayList findByEnjoyerId(Long enjoyerId);
+    Optional<Habit> findByIdAndEnjoyer(Long Id, Enjoyer enjoyer);
 }
