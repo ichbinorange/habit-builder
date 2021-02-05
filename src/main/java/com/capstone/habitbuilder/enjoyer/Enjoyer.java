@@ -33,12 +33,13 @@ public class Enjoyer extends Auditable<String> {
             generator = "enjoyer_sequence")
 
     //    private Long chat-botId;   for later
+    @Column(updatable = false)
     private Long id;
 
     @Column(nullable = false)
     private String name;
 
-    @Column(unique = true, nullable = false)
+    @Column(unique = true, nullable = false, updatable = false)
     private String email;
 
     @JsonIgnore

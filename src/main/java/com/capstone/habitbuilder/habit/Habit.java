@@ -31,7 +31,9 @@ public class Habit extends Auditable<String> {
     @GeneratedValue(strategy = GenerationType.SEQUENCE,
             generator = "habit_sequence")
 
+    @Column(updatable = false)
     private Long id;
+
     private String title;
     private String goal;
     private String description;
@@ -42,7 +44,7 @@ public class Habit extends Auditable<String> {
     // Setup many to one relationship with Enjoyer
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne(targetEntity = Enjoyer.class, fetch = FetchType.LAZY)
-    @JoinColumn(name = "ENJOYER_ID", referencedColumnName = "ID")
+    @JoinColumn(name = "ENJOYER_ID", referencedColumnName = "ID", updatable = false)
     private Enjoyer enjoyer;
 
     // Setup one to many relationship with HabitTracker
