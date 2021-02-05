@@ -1,5 +1,6 @@
 package com.capstone.habitbuilder.enjoyer;
 
+import com.capstone.habitbuilder.habit.Habit;
 import com.capstone.habitbuilder.oauthapi.ResourceNotFoundException;
 import com.capstone.habitbuilder.security.CurrentUser;
 import com.capstone.habitbuilder.security.UserPrincipal;
@@ -19,8 +20,7 @@ public class EnjoyerController {
         this.enjoyerRepository = enjoyerRepository;
     }
 
-
-    // Index - need to delete due to not necessary for enjoyer
+    // Index - info about current user
     @GetMapping("/me")
     @PreAuthorize("hasRole('ENJOYER')")
     public Enjoyer getCurrentUser(@CurrentUser UserPrincipal userPrincipal) {
@@ -28,32 +28,23 @@ public class EnjoyerController {
                 .orElseThrow(() -> new ResourceNotFoundException("Enjoyer", "id", userPrincipal.getId()));
     }
 
-    // Show
+    // Show - info show current user's friends
     @GetMapping(path = "{enjoyerId}")
     public Enjoyer showEnjoyer(@PathVariable("enjoyerId") Long enjoyerId) {
         return enjoyerService.showEnjoyer(enjoyerId);
     }
 
-    // Create
-    @PostMapping
-    public void registerNewEnjoyer(@RequestBody Enjoyer enjoyer) {
-        enjoyerService.addNewEnjoyer(enjoyer);
-    }
-
     // Update
     @PutMapping(path = "{enjoyerId}")
-    public void updateEnjoyer(
-            @PathVariable("enjoyerId") Long enjoyerId,
-            @RequestParam(required = false) String name,
-            @RequestParam(required = false) String photoUrl,
-            @RequestParam(required = false) String about) {
+    public void updateEnjoyer(@PathVariable("enjoyerId") Long enjoyerId,
+                              @RequestBody Enjoyer enjoyer) {
 
-        enjoyerService.updateEnjoyer(enjoyerId, name, photoUrl, about);
+            enjoyerService.updateEnjoyer(enjoyerId, enjoyer);
     }
 
     // Delete
     @DeleteMapping(path = "{enjoyerId}")
     public void deleteEnjoyer(@PathVariable("enjoyerId") Long enjoyerId) {
-        enjoyerService.deleteEnjoyer(enjoyerId);
+            enjoyerService.deleteEnjoyer(enjoyerId);
     }
 }

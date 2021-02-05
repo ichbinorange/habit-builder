@@ -33,18 +33,19 @@ public class Enjoyer extends Auditable<String> {
             generator = "enjoyer_sequence")
 
     //    private Long chat-botId;   for later
+    @Column(updatable = false)
     private Long id;
 
     @Column(nullable = false)
     private String name;
 
-    @Column(unique = true, nullable = false)
+    @Column(unique = true, updatable = false)
     private String email;
 
     @JsonIgnore
     private String password;
 
-    private String imageUrl;
+    private String imageUrl = "https://robohash.org/nihilipsamvoluptas.png?size=300x300&set=set1";
 
     @Column(nullable = false)
     private Boolean emailVerified = false;
@@ -53,7 +54,10 @@ public class Enjoyer extends Auditable<String> {
 
     @NotNull
     @Enumerated(EnumType.STRING)
+    @Column(unique = true, updatable = false)
     private AuthProvider provider;
+
+    @Column(unique = true, updatable = false)
     private String providerId;
 
     // Setup one to many relationship with Habit

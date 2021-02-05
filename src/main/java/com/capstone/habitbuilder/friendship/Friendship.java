@@ -16,17 +16,17 @@ public class Friendship {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Boolean activated;
+    private Boolean activated = false;
 
     // Setup relationship with Enjoyer
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne(targetEntity = Enjoyer.class, fetch = FetchType.LAZY)
-    @JoinColumn(name = "REQUESTER_ID", referencedColumnName = "ID")
+    @JoinColumn(name = "REQUESTER_ID", referencedColumnName = "ID", updatable = false)
     private Enjoyer requester;
 
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne(targetEntity = Enjoyer.class, fetch = FetchType.LAZY)
-    @JoinColumn(name = "RECEIVER_ID", referencedColumnName = "ID")
+    @JoinColumn(name = "RECEIVER_ID", referencedColumnName = "ID", updatable = false)
     private Enjoyer receiver;
 
     public Friendship() {}

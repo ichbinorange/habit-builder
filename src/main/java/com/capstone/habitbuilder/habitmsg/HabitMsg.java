@@ -25,13 +25,14 @@ public class HabitMsg extends Auditable<String> {
     @GeneratedValue(strategy = GenerationType.SEQUENCE,
             generator = "habitMsg_sequence")
 
+    @Column(updatable = false)
     private Long id;
     private String text;
 
     // Setup many to one relationship with Habit
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne(targetEntity = Habit.class, fetch = FetchType.LAZY)
-    @JoinColumn(name = "HABIT_ID", referencedColumnName = "ID")
+    @JoinColumn(name = "HABIT_ID", referencedColumnName = "ID", updatable = false)
     private Habit habit;
 
     // Friend and habitMsg relation setup?

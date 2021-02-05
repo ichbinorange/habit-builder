@@ -20,7 +20,7 @@ import java.util.Date;
 public class Auditable<U>
 {
     @CreatedDate
-    @Column(name = "created_date")
+    @Column(name = "created_date", updatable = false)
     private Date createdDate;
 
     @LastModifiedDate
