@@ -27,7 +27,7 @@ public class HabitTracker extends Auditable<String> {
 
     @Column(updatable = false)
     private Long id;
-    private Boolean record;
+    private Boolean record = false;
     private String memo;
 
     // Setup many to one relationship with Habit

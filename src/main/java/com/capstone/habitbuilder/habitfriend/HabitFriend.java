@@ -27,7 +27,7 @@ public class HabitFriend extends Auditable<String> {
 
     @Column(updatable = false)
     private Long id;
-    private Boolean liked; // like is reserved keyword for psql
+    private Boolean liked = false; // like is reserved keyword for psql
 
     // Setup many to one relationship with Habit --> belongs to owner
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})

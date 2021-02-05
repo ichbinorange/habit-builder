@@ -37,9 +37,9 @@ public class Habit extends Auditable<String> {
     private String title;
     private String goal;
     private String description;
-    private String streak;
-    private Boolean reminder;
-    private Boolean habitBuilt;
+    private String streak = "daily";
+    private Boolean reminder = false;
+    private Boolean habitBuilt = false;
 
     // Setup many to one relationship with Enjoyer
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})

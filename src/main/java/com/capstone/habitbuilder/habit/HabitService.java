@@ -28,7 +28,7 @@ public class HabitService {
             String currentUserName = authentication.getName();
             return currentUserName;
         } else {
-            return "Can't now find this user";
+            throw new IllegalStateException("Can't now find this user");
         }
     }
 
@@ -82,16 +82,16 @@ public class HabitService {
                 ));
 
         if (habitRepository.findByIdAndEnjoyer(habitId, enjoyer) != null) {
-            if (habit.getTitle() != null && habit.getTitle().length() > 0 ) {
+            if (habit.getTitle() != null && habit.getTitle().length() > 0) {
                 habit.setTitle(habit.getTitle());
             }
-            if (habit.getGoal() != null && habit.getGoal().length() > 0 ) {
+            if (habit.getGoal() != null && habit.getGoal().length() > 0) {
                 habit.setGoal(habit.getGoal());
             }
-            if (habit.getDescription() != null && habit.getDescription().length() > 0 ) {
+            if (habit.getDescription() != null && habit.getDescription().length() > 0) {
                 habit.setDescription(habit.getDescription());
             }
-            if (habit.getStreak() != null && habit.getStreak().length() > 0 ) {
+            if (habit.getStreak() != null && habit.getStreak().length() > 0) {
                 habit.setStreak(habit.getStreak());
             }
 

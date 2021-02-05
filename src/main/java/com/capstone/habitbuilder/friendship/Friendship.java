@@ -16,7 +16,7 @@ public class Friendship {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Boolean activated;
+    private Boolean activated = false;
 
     // Setup relationship with Enjoyer
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})

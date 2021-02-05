@@ -35,7 +35,7 @@ public class HabitController {
     // Update
     @PutMapping(path = "/habit/{habitId}")
     public void updateHabit(@PathVariable("habitId") Long habitId,
-            @RequestBody Habit habit) {
+                            @RequestBody Habit habit) {
             habitService.updateHabit(habitId, habit);
     }
 
