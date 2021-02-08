@@ -54,7 +54,7 @@ public class Enjoyer extends Auditable<String> {
 
     @NotNull
     @Enumerated(EnumType.STRING)
-    @Column(unique = true, updatable = false)
+    @Column(updatable = false)
     private AuthProvider provider;
 
     @Column(unique = true, updatable = false)

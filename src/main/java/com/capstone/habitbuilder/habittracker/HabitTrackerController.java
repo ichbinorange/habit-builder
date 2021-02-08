@@ -1,5 +1,6 @@
 package com.capstone.habitbuilder.habittracker;
 
+import com.capstone.habitbuilder.habit.Habit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,16 +13,16 @@ public class HabitTrackerController {
         this.habitTrackerService = habitTrackerService;
     }
 
-    // Index - need to change based on userId
-    @GetMapping(path="/habitTrackers")
-    public Iterable<HabitTracker> getHabitTrackers() {
-        return habitTrackerService.getHabitTrackers();
+    // Index - all habits' records for a user
+    @GetMapping(path="/habitTrackers/{enjoyerId}")
+    public Iterable<HabitTracker> getHabitTrackers(@PathVariable("enjoyerId") Long enjoyerId) {
+        return habitTrackerService.getHabitTrackers(enjoyerId);
     }
 
-    // Show
-    @GetMapping(path = "/habitTracker/{habitTrackerId}")
-    public HabitTracker showHabitTracker(@PathVariable("habitTrackerId") Long habitTrackerId) {
-        return habitTrackerService.showHabitTracker(habitTrackerId);
+    // Show - one habit's records
+    @GetMapping(path = "/habitTracker/{habitId}")
+    public Iterable<HabitTracker> showHabitTrackers(@PathVariable("habitId") Long habitId) {
+        return habitTrackerService.showHabitTrackers(habitId);
     }
 
     // Create
@@ -35,10 +36,8 @@ public class HabitTrackerController {
     @PutMapping(path = "/habitTracker/{habitTrackerId}")
     public void updateHabitTracker(
             @PathVariable("habitTrackerId") Long habitTrackerId,
-            @RequestParam(required = false) Boolean record,
-            @RequestParam(required = false) String memo) {
-
-        habitTrackerService.updateHabitTracker(habitTrackerId, record, memo);
+            @RequestBody HabitTracker habitTracker) {
+        habitTrackerService.updateHabitTracker(habitTrackerId, habitTracker);
     }
 
     // Delete
