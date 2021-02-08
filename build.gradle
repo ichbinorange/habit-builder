@@ -39,7 +39,7 @@ test {
 }
 
 bootRun {
-	systemProperty 'spring.datasource.username', findProperty('PSQL_USERNAME')
+//	systemProperty 'spring.datasource.username', findProperty('PSQL_USERNAME')
 	systemProperty 'spring.security.oauth2.client.registration.google.client-id', findProperty('GOOGLE_CLIENT_ID')
 	systemProperty 'spring.security.oauth2.client.registration.google.client-secret', findProperty('GOOGLE_CLIENT_SECRET')
 }

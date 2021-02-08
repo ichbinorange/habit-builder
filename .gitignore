@@ -38,3 +38,4 @@ out/
 
 ### hide api secret
 gradle.properties
+Dockerfile
