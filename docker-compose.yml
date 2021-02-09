@@ -9,16 +9,25 @@ services:
     depends_on:
       - postgresql
     environment: # Pass environment variables to the service
-      SPRING_DATASOURCE_URL: jdbc:postgresql://habit_builder_postgres:5432/habitbuilder
-      SPRING_DATASOURCE_USERNAME: habitbuilderdocker
-      SPRING_DATASOURCE_PASSWORD: habitbuilderdocker
+      # revised DATABASE_URL to JDBC_URL: https://devcenter.heroku.com/articles/connecting-to-relational-databases-on-heroku-with-java
+      SPRING_DATASOURCE_URL: ${HEROKU_PSQLDB}
+      SPRING_DATASOURCE_USERNAME: fydstdjbhenvak
+      SPRING_DATASOURCE_PASSWORD: f1f657929a4002d5a59e78043d9ca6e77c5f112a18047b0db6ffb92742c1a225
+
+#      SPRING_DATASOURCE_URL: jdbc:postgresql://habit_builder_postgres:5432/habitbuilder
+#      SPRING_DATASOURCE_USERNAME: habitbuilderdocker
+#      SPRING_DATASOURCE_PASSWORD: habitbuilderdocker
   postgresql:
-    container_name: habit_builder_postgres
+    container_name: ec2-54-225-190-241.compute-1.amazonaws.com
+#    container_name: habit_builder_postgres
     image: postgres
     ports:
       - 5432:5432
     environment:
-      - POSTGRES_DB=habitbuilder
-      - POSTGRES_USER=habitbuilderdocker
-      - POSTGRES_PASSWORD=habitbuilderdocker
+      - POSTGRES_DB=d5cfl02tlmjad
+      - POSTGRES_USER=fydstdjbhenvak
+      - POSTGRES_PASSWORD=f1f657929a4002d5a59e78043d9ca6e77c5f112a18047b0db6ffb92742c1a225
+#      - POSTGRES_DB=habitbuilder
+#      - POSTGRES_USER=habitbuilderdocker
+#      - POSTGRES_PASSWORD=habitbuilderdocker
 
