@@ -27,14 +27,14 @@ public class HabitTracker extends Auditable<String> {
 
     @Column(updatable = false)
     private Long id;
-    private Boolean record = false;
-    private String memo;
-
     // Setup many to one relationship with Habit
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne(targetEntity = Habit.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "HABIT_ID", referencedColumnName = "ID", updatable = false)
     private Habit habit;
+
+    private String memo;
+    private  Long workTime;
 
     public HabitTracker() {}
 
@@ -42,10 +42,10 @@ public class HabitTracker extends Auditable<String> {
 
     // create a new habit
     public HabitTracker(Habit habit,
-                 Boolean record,
-                 String memo) {
+                        Long workTime,
+                        String memo) {
         this.habit = habit;
-        this.record = record;
+        this.workTime = workTime;
         this.memo = memo;
     }
 }
