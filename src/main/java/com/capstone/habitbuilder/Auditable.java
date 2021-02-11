@@ -13,12 +13,11 @@ import javax.persistence.MappedSuperclass;
 import java.util.Date;
 
 
-@Getter(AccessLevel.PROTECTED)
+@Getter(AccessLevel.PUBLIC)
 @Setter(AccessLevel.PROTECTED)
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public class Auditable<U>
-{
+public class Auditable<U> {
     @CreatedDate
     @Column(name = "created_date", updatable = false)
     private Date createdDate;
