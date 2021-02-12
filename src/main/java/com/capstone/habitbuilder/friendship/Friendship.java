@@ -1,20 +1,31 @@
 package com.capstone.habitbuilder.friendship;
 
+import com.capstone.habitbuilder.Auditable;
 import com.capstone.habitbuilder.enjoyer.Enjoyer;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 
 @Setter(AccessLevel.PUBLIC)
 @Getter(AccessLevel.PUBLIC)
+@ToString
 @Entity
 @Table
-public class Friendship {
+public class Friendship extends Auditable<String> {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(
+            name = "friendship_sequence",
+            sequenceName = "friendship_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,
+            generator = "friendship_sequence")
+
+    @Column(updatable = false)
     private Long id;
     private Boolean activated = false;
 

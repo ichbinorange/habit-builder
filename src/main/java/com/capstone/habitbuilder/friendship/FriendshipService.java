@@ -1,25 +1,42 @@
 package com.capstone.habitbuilder.friendship;
 
+import com.capstone.habitbuilder.enjoyer.Enjoyer;
+import com.capstone.habitbuilder.enjoyer.EnjoyerRepository;
+import com.capstone.habitbuilder.habit.Habit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class FriendshipService {
     private final FriendshipRepository friendshipRepository;
+    private final EnjoyerRepository enjoyerRepository;
 
     @Autowired
-    public FriendshipService(FriendshipRepository friendshipRepository) {
+    public FriendshipService(FriendshipRepository friendshipRepository, EnjoyerRepository enjoyerRepository) {
         this.friendshipRepository = friendshipRepository;
+        this.enjoyerRepository = enjoyerRepository;
     }
 
-    // index - need to delete due to not necessary for friendship
-    public Iterable<Friendship> getFriendships() {
-        return friendshipRepository.findAll();
+    // index
+    public Map<String, ArrayList<Friendship>> getFriendships(Long enjoyerId) {
+        Enjoyer enjoyer = enjoyerRepository.findById(enjoyerId)
+                .orElseThrow(() -> new IllegalStateException(
+                        "enjoyer with id " + enjoyerId + " does not exists"
+                ));
+        ArrayList<Friendship> requesterList = friendshipRepository.findByRequesterId(enjoyerId);
+        ArrayList<Friendship> receiverList = friendshipRepository.findByReceiverId(enjoyerId);
+
+        Map<String,ArrayList<Friendship>> map = new HashMap();
+        map.put("requester", requesterList);
+        map.put("receiver", receiverList);
+
+        return map;
     }
 
-    // show
+    // show - may need to delete due to not necessary for friendship
     public Friendship showFriendship(Long friendshipId)  {
         Friendship friendship = friendshipRepository.findById(friendshipId)
                 .orElseThrow(() -> new IllegalStateException(
@@ -28,24 +45,62 @@ public class FriendshipService {
         return friendship;
     }
 
-    // Create
-    public void addNewFriendship(Friendship friendship) {
-        // Need to re-write the friendship checkout method
-        Optional<Friendship> requesterIdOptional1 = friendshipRepository.findEnjoyerByRequester(friendship.getRequester());
-        Optional<Friendship> receiverIdOptional1 = friendshipRepository.findEnjoyerByReceiver(friendship.getReceiver());
-        if (requesterIdOptional1.isPresent() && receiverIdOptional1.isPresent()) {
-            throw new IllegalStateException("You two are friends already!");
+    // Create - for requester
+    public void addNewFriendship(Long requesterId, Long receiverId) {
+        Enjoyer requester = enjoyerRepository.findById(requesterId)
+                .orElseThrow(() -> new IllegalStateException(
+                        "Requester with enjoyer id " + requesterId + " does not exists"
+                ));
+        Enjoyer receiver = enjoyerRepository.findById(receiverId)
+                .orElseThrow(() -> new IllegalStateException(
+                        "Requester with enjoyer id " + receiverId + " does not exists"
+                ));
+        Optional<Friendship> friendshipOptional1 = friendshipRepository.findByRequesterAndReceiver(requester, receiver);
+        Optional<Friendship> friendshipOptional2 = friendshipRepository.findByRequesterAndReceiver(receiver, requester);
+        if (friendshipOptional1.isPresent()) {
+            if (friendshipOptional1.get().getActivated()) {
+                throw new IllegalStateException("You two are friends already!");
+            } else {
+                throw new IllegalStateException("Wait for your friend to accept your request");
+            }
+        } else if (friendshipOptional2.isPresent()) {
+            if (friendshipOptional2.get().getActivated()) {
+                throw new IllegalStateException("You two are friends already!");
+            } else {
+                throw new IllegalStateException("Wait for your friend to accept your request");
+            }
         }
-        Optional<Friendship> requesterIdOptional2 = friendshipRepository.findEnjoyerByRequester(friendship.getReceiver());
-        Optional<Friendship> receiverIdOptional2 = friendshipRepository.findEnjoyerByReceiver(friendship.getRequester());
-        if (requesterIdOptional2.isPresent() && receiverIdOptional2.isPresent()) {
-            throw new IllegalStateException("You two are friends already!");
-        }
-        friendship.setActivated(true);
+
+        Friendship friendship = new Friendship();
+        friendship.setRequester(requester);
+        friendship.setReceiver(receiver);
         friendshipRepository.save(friendship);
     }
 
-    // Delete
+    // Update - for receiver
+    @Transactional
+    public void activateFriendship(Long requesterId, Long receiverId) {
+        Enjoyer requester = enjoyerRepository.findById(requesterId)
+                .orElseThrow(() -> new IllegalStateException(
+                        "Requester with enjoyer id " + requesterId + " does not exists"
+                ));
+        Enjoyer receiver = enjoyerRepository.findById(receiverId)
+                .orElseThrow(() -> new IllegalStateException(
+                        "Requester with enjoyer id " + receiverId + " does not exists"
+                ));
+        Optional<Friendship> friendshipOptional = friendshipRepository.findByRequesterAndReceiver(requester, receiver);
+        if (friendshipOptional.isPresent()) {
+            if (friendshipOptional.get().getActivated()) {
+                throw new IllegalStateException("You two are friends already!");
+            } else {
+                Friendship friendship = friendshipOptional.get();
+                friendship.setActivated(true);
+                friendshipRepository.save(friendship);
+            }
+        }
+    }
+
+    // Delete - for both requester and receiver
     public void deleteFriendship(Long friendshipId) {
         boolean exists = friendshipRepository.existsById(friendshipId);
         if (!exists) {
