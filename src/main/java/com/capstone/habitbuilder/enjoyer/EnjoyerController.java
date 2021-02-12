@@ -34,6 +34,13 @@ public class EnjoyerController {
         return enjoyerService.showEnjoyer(enjoyerId);
     }
 
+    // Search - find a user
+    @GetMapping(path = "/email/{enjoyerEmail}")
+    public Enjoyer findEnjoyer(@PathVariable("enjoyerEmail") String enjoyerEmail) {
+        return enjoyerRepository.findEnjoyerByEmail(enjoyerEmail)
+                .orElseThrow(() -> new ResourceNotFoundException("Enjoyer", "email", enjoyerEmail));
+    }
+
     // Update
     @PutMapping(path = "{enjoyerId}")
     public void updateEnjoyer(@PathVariable("enjoyerId") Long enjoyerId,
