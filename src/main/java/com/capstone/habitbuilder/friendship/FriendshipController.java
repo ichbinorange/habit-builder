@@ -37,10 +37,10 @@ public class FriendshipController {
     }
 
     // Update - for receiver
-    @PutMapping(path = "requester/{requesterId}/receiver/{receiverId}")
-    public void activateFriendship(@PathVariable("requesterId") Long requesterId,
+    @PutMapping(path = "{friendshipId}/receiver/{receiverId}")
+    public void activateFriendship(@PathVariable("friendshipId") Long friendshipId,
                                    @PathVariable("receiverId") Long receiverId) {
-        friendshipService.activateFriendship(requesterId, receiverId);
+        friendshipService.activateFriendship(friendshipId, receiverId);
     }
 
     // Delete - for both requester and receiver

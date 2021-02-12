@@ -79,21 +79,21 @@ public class FriendshipService {
 
     // Update - for receiver
     @Transactional
-    public void activateFriendship(Long requesterId, Long receiverId) {
-        Enjoyer requester = enjoyerRepository.findById(requesterId)
+    public void activateFriendship(Long friendshipId, Long receiverId) {
+        Friendship friendship = friendshipRepository.findById(friendshipId)
                 .orElseThrow(() -> new IllegalStateException(
-                        "Requester with enjoyer id " + requesterId + " does not exists"
+                        "friendship with id " + friendshipId + " does not exists"
                 ));
         Enjoyer receiver = enjoyerRepository.findById(receiverId)
                 .orElseThrow(() -> new IllegalStateException(
                         "Requester with enjoyer id " + receiverId + " does not exists"
                 ));
-        Optional<Friendship> friendshipOptional = friendshipRepository.findByRequesterAndReceiver(requester, receiver);
-        if (friendshipOptional.isPresent()) {
-            if (friendshipOptional.get().getActivated()) {
+        if (friendship.getReceiver().getId() != receiverId) {
+            throw new IllegalStateException("You're not this friendship's receiver and can't do confirm action.");
+        } else {
+            if (friendship.getActivated()) {
                 throw new IllegalStateException("You two are friends already!");
             } else {
-                Friendship friendship = friendshipOptional.get();
                 friendship.setActivated(true);
                 friendshipRepository.save(friendship);
             }
