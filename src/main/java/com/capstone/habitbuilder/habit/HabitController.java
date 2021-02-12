@@ -1,6 +1,5 @@
 package com.capstone.habitbuilder.habit;
 
-import com.capstone.habitbuilder.enjoyer.EnjoyerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

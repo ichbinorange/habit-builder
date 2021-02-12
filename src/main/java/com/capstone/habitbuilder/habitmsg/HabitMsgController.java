@@ -25,10 +25,11 @@ public class HabitMsgController {
     }
 
     // Create
-    @PostMapping(path = "/habit/{habitId}/habitMsg")
+    @PostMapping(path = "/habit/{habitId}/habitMsg/{friendId}")
     public void registerNewHabitMsg(@RequestBody HabitMsg habitMsg,
-                                    @PathVariable("habitId") Long habitId) {
-        habitMsgService.addNewHabitMsg(habitMsg, habitId);
+                                    @PathVariable("habitId") Long habitId,
+                                    @PathVariable("friendId") Long friendId) {
+        habitMsgService.addNewHabitMsg(habitMsg, habitId, friendId);
     }
 
     // Update

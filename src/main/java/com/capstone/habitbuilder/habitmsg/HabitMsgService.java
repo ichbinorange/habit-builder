@@ -1,5 +1,7 @@
 package com.capstone.habitbuilder.habitmsg;
 
+import com.capstone.habitbuilder.enjoyer.Enjoyer;
+import com.capstone.habitbuilder.enjoyer.EnjoyerRepository;
 import com.capstone.habitbuilder.habit.Habit;
 import com.capstone.habitbuilder.habit.HabitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,11 +12,13 @@ import org.springframework.transaction.annotation.Transactional;
 public class HabitMsgService {
     private final HabitMsgRepository habitMsgRepository;
     private final HabitRepository habitRepository;
+    private final EnjoyerRepository enjoyerRepository;
 
     @Autowired
-    public HabitMsgService(HabitMsgRepository habitMsgRepository, HabitRepository habitRepository) {
+    public HabitMsgService(HabitMsgRepository habitMsgRepository, HabitRepository habitRepository, EnjoyerRepository enjoyerRepository) {
         this.habitMsgRepository = habitMsgRepository;
         this.habitRepository = habitRepository;
+        this.enjoyerRepository = enjoyerRepository;
     }
 
     // index - need to change based on userId
@@ -32,12 +36,17 @@ public class HabitMsgService {
     }
 
     // Create
-    public void addNewHabitMsg(HabitMsg habitMsg, Long habitId) {
+    public void addNewHabitMsg(HabitMsg habitMsg, Long habitId, Long friendId) {
         Habit habit = habitRepository.findById(habitId)
                 .orElseThrow(() -> new IllegalStateException(
                         "habit with id " + habitId + " does not exists"
                 ));
+        Enjoyer enjoyer = enjoyerRepository.findById(friendId)
+                .orElseThrow(() -> new IllegalStateException(
+                        "friend with id " + friendId + " does not exists"
+                ));
         habitMsg.setHabit(habit);
+        habitMsg.setFriend(enjoyer);
         habitMsgRepository.save(habitMsg);
     }
 

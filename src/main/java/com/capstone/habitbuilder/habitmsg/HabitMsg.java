@@ -1,6 +1,7 @@
 package com.capstone.habitbuilder.habitmsg;
 
 import com.capstone.habitbuilder.Auditable;
+import com.capstone.habitbuilder.enjoyer.Enjoyer;
 import com.capstone.habitbuilder.habit.Habit;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AccessLevel;
@@ -36,6 +37,10 @@ public class HabitMsg extends Auditable<String> {
     private Habit habit;
 
     // Friend and habitMsg relation setup?
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @ManyToOne(targetEntity = Enjoyer.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "FRIEND_ID", referencedColumnName = "ID", updatable = false)
+    private Enjoyer friend;
 
     public HabitMsg() {}
     // create a new habitMsg
