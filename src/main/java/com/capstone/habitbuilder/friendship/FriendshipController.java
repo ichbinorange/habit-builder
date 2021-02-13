@@ -1,7 +1,11 @@
 package com.capstone.habitbuilder.friendship;
 
+import com.capstone.habitbuilder.enjoyer.Enjoyer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.Map;
 
 @RestController
 @RequestMapping(path="/friendship")
@@ -13,25 +17,33 @@ public class FriendshipController {
         this.friendshipService = friendshipService;
     }
 
-    // Index - need to delete due to not necessary for enjoyer
-    @GetMapping
-    public Iterable<Friendship> getFriendships() {
-        return friendshipService.getFriendships();
+    // Index - all friends for a user
+    @GetMapping(path="{enjoyerId}")
+    public Map<String, ArrayList<Friendship>> getFriendships(@PathVariable("enjoyerId") Long enjoyerId) {
+        return friendshipService.getFriendships(enjoyerId);
     }
 
-    // Show
-    @GetMapping(path = "{friendshipId}")
-    public Friendship showFriendship(@PathVariable("friendshipId") Long friendshipId) {
-        return friendshipService.showFriendship(friendshipId);
+    // Show - may need to delete due to not necessary for friendship
+//    @GetMapping(path = "{friendshipId}")
+//    public Friendship showFriendship(@PathVariable("friendshipId") Long friendshipId) {
+//        return friendshipService.showFriendship(friendshipId);
+//    }
+
+    // Create - for requester
+    @PostMapping(path = "requester/{requesterId}/receiver/{receiverId}")
+    public void registerNewFriendship(@PathVariable("requesterId") Long requesterId,
+                                      @PathVariable("receiverId") Long receiverId) {
+        friendshipService.addNewFriendship(requesterId, receiverId);
     }
 
-    // Create
-    @PostMapping
-    public void registerNewFriendship(@RequestBody Friendship friendship) {
-        friendshipService.addNewFriendship(friendship);
+    // Update - for receiver
+    @PutMapping(path = "{friendshipId}/receiver/{receiverId}")
+    public void activateFriendship(@PathVariable("friendshipId") Long friendshipId,
+                                   @PathVariable("receiverId") Long receiverId) {
+        friendshipService.activateFriendship(friendshipId, receiverId);
     }
 
-    // Delete
+    // Delete - for both requester and receiver
     @DeleteMapping(path = "{friendshipId}")
     public void deleteFriendship(@PathVariable("friendshipId") Long friendshipId) {
         friendshipService.deleteFriendship(friendshipId);
