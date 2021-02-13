@@ -4,9 +4,12 @@ import com.capstone.habitbuilder.enjoyer.Enjoyer;
 import com.capstone.habitbuilder.enjoyer.EnjoyerRepository;
 import com.capstone.habitbuilder.habit.Habit;
 import com.capstone.habitbuilder.habit.HabitRepository;
+import com.capstone.habitbuilder.habittracker.HabitTracker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
 
 @Service
 public class HabitMsgService {
@@ -22,8 +25,17 @@ public class HabitMsgService {
     }
 
     // index - need to change based on userId
-    public Iterable<HabitMsg> getHabitMsgs() {
-        return habitMsgRepository.findAll();
+    public Iterable<HabitMsg> getHabitMsgs(Long enjoyerId) {
+        Enjoyer enjoyer = enjoyerRepository.findById(enjoyerId)
+                .orElseThrow(() -> new IllegalStateException(
+                        "enjoyer with id " + enjoyerId + " does not exists"
+                ));
+        ArrayList<Habit> habitList = habitRepository.findByEnjoyerId(enjoyerId);
+        ArrayList<HabitMsg> habitMsgList = new ArrayList<>();
+        for (Habit habit: habitList) {
+            habitMsgList.addAll(habitMsgRepository.findByHabitId(habit.getId()));
+        }
+        return habitMsgList;
     }
 
     // show

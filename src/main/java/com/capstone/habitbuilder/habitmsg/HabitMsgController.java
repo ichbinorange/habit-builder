@@ -13,9 +13,9 @@ public class HabitMsgController {
     }
 
     // Index - need to change based on userId
-    @GetMapping(path="/habitMsgs")
-    public Iterable<HabitMsg> getHabitMsgs() {
-        return habitMsgService.getHabitMsgs();
+    @GetMapping(path="/habitMsgs/{enjoyerId}")
+    public Iterable<HabitMsg> getHabitMsgs(@PathVariable("enjoyerId") Long enjoyerId) {
+        return habitMsgService.getHabitMsgs(enjoyerId);
     }
 
     // Show
