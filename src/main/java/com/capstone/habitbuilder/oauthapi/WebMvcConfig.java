@@ -11,7 +11,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("http://localhost:3001") // ("https://*.domain.com")
+                .allowedOrigins("https://ichbinorange.github.io", "https://ichbinorange.github.io/reactjs-habit-builder") // ("https://ichbinorange.github.io/reactjs-habit-builder" or for local "http://localhost:3001")
                 .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
                 .allowCredentials(true)
