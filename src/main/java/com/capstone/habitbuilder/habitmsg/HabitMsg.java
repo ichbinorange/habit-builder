@@ -29,6 +29,7 @@ public class HabitMsg extends Auditable<String> {
     @Column(updatable = false)
     private Long id;
     private String text;
+    private String imageUrl = "https://images.pexels.com/photos/2740955/pexels-photo-2740955.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260";
 
     // Setup many to one relationship with Habit
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -45,8 +46,10 @@ public class HabitMsg extends Auditable<String> {
     public HabitMsg() {}
     // create a new habitMsg
     public HabitMsg(Habit habit,
-                    String text) {
+                    String text,
+                    String imageUrl) {
         this.habit = habit;
         this.text = text;
+        this.imageUrl = imageUrl;
     }
 }

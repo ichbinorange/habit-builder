@@ -34,7 +34,7 @@ public class HabitTracker extends Auditable<String> {
     private Habit habit;
 
     private String memo;
-    private  Long workTime;
+    private  Float workTime;
 
     public HabitTracker() {}
 
@@ -42,7 +42,7 @@ public class HabitTracker extends Auditable<String> {
 
     // create a new habit
     public HabitTracker(Habit habit,
-                        Long workTime,
+                        Float workTime,
                         String memo) {
         this.habit = habit;
         this.workTime = workTime;

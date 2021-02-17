@@ -7,6 +7,9 @@ import org.springframework.security.oauth2.core.endpoint.OAuth2AuthorizationRequ
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 public class HttpCookieOAuth2AuthorizationRequestRepository implements AuthorizationRequestRepository<OAuth2AuthorizationRequest> {
     public static final String OAUTH2_AUTHORIZATION_REQUEST_COOKIE_NAME = "oauth2_auth_request";
@@ -15,9 +18,24 @@ public class HttpCookieOAuth2AuthorizationRequestRepository implements Authoriza
 
     @Override
     public OAuth2AuthorizationRequest loadAuthorizationRequest(HttpServletRequest request) {
-        return CookieUtils.getCookie(request, OAUTH2_AUTHORIZATION_REQUEST_COOKIE_NAME)
-                .map(cookie -> CookieUtils.deserialize(cookie, OAuth2AuthorizationRequest.class))
-                .orElse(null);
+       
+        final Optional<OAuth2AuthorizationRequest> requestOptional = CookieUtils.getCookie(
+                request, OAUTH2_AUTHORIZATION_REQUEST_COOKIE_NAME)
+                .map(cookie -> CookieUtils.deserialize(cookie, OAuth2AuthorizationRequest.class));
+        if (requestOptional.isEmpty()) {
+            System.out.println("no request found in cookies");
+            return null;
+        }
+
+        final OAuth2AuthorizationRequest authRequest = requestOptional.get();
+        final Map<String, Object> additionalParams = new HashMap<>(authRequest.getAdditionalParameters());
+        additionalParams.put("prompt", "select_account consent");
+
+        final OAuth2AuthorizationRequest completeRequest = OAuth2AuthorizationRequest.from(authRequest)
+                .additionalParameters(additionalParams)
+                .build();
+
+        return completeRequest;
     }
 
     @Override
