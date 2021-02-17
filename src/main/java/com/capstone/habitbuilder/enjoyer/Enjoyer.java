@@ -50,7 +50,7 @@ public class Enjoyer extends Auditable<String> {
     @Column(nullable = false)
     private Boolean emailVerified = false;
 
-    private String about;
+    private String about = "TBD...";
 
     @NotNull
     @Enumerated(EnumType.STRING)
