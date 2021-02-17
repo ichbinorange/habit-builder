@@ -3,10 +3,7 @@ package com.capstone.habitbuilder.oauthapi;
 import com.capstone.habitbuilder.security.CustomUserDetailsService;
 import com.capstone.habitbuilder.security.RestAuthenticationEntryPoint;
 import com.capstone.habitbuilder.security.TokenAuthenticationFilter;
-import com.capstone.habitbuilder.security.oauth2.CustomOAuth2UserService;
-import com.capstone.habitbuilder.security.oauth2.HttpCookieOAuth2AuthorizationRequestRepository;
-import com.capstone.habitbuilder.security.oauth2.OAuth2AuthenticationFailureHandler;
-import com.capstone.habitbuilder.security.oauth2.OAuth2AuthenticationSuccessHandler;
+import com.capstone.habitbuilder.security.oauth2.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,6 +17,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
+import org.springframework.security.oauth2.client.web.DefaultOAuth2AuthorizationRequestResolver;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
@@ -31,6 +30,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
         prePostEnabled = true
 )
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+    @Autowired
+    private ClientRegistrationRepository clientRegistrationRepository;
+
     @Autowired
     private CustomUserDetailsService customUserDetailsService;
 
@@ -118,6 +120,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .authorizationEndpoint()
                         .baseUri("/oauth2/authorize")
                         .authorizationRequestRepository(cookieAuthorizationRequestRepository())
+                        .authorizationRequestResolver(new CustomAuthorizationRequestResolver(clientRegistrationRepository))
                         .and()
                     .redirectionEndpoint()
                         .baseUri("/oauth2/callback/*")
