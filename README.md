@@ -1,10 +1,10 @@
 # Habit Buddy 
 ## Overview 
 #### What is Habit Buddy?
-* <strong>Habit Buddy is a capstone project for [Ada Developers Academy](https://adadevelopersacademy.org/) by [ichbinorange](https://github.com/ichbinorange)</strong>
+* <strong>Habit Buddy is a three-week capstone project for [Ada Developers Academy](https://adadevelopersacademy.org/) by [ichbinorange](https://github.com/ichbinorange)</strong>
 * Web app
 * It was inspired by the support system of Ada developers Academy
-  * Habit Buddy tries combining a habit developing system with a friend support system
+  * Habit Buddy tries to combine a habit tracking system with friends' supports
 * App target
   * People who want to track progress when building a new habit
   * People who would love to have friends support while developing their habits
