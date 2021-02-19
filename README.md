@@ -1,8 +1,9 @@
-# Habit Buddy (not finished yet)
+# Habit Buddy 
 ## Overview 
 #### What is Habit Buddy?
+* <strong>Habit Buddy is a capstone project for [Ada Developers Academy](https://adadevelopersacademy.org/) by [ichbinorange](https://github.com/ichbinorange)</strong>
 * Web app
-* It was inspired by the support system of [Ada developers Academy](https://adadevelopersacademy.org/)
+* It was inspired by the support system of Ada developers Academy
   * Habit Buddy tries combining a habit developing system with a friend support system
 * App target
   * People who want to track progress when building a new habit
@@ -11,6 +12,8 @@
   * Start a habit
   * Track habit progress
   * Create a friendship and get encouragements from friends
+
+<img src="https://github.com/ichbinorange/reactjs-habit-builder/blob/readme-demo/src/img/habit-budy-homepage.png" alt="Habit Buddy homepage" width="500">.
 ## How to get it set up
 * Sign up/login with your google account with [Habit Buddy](https://ichbinorange.github.io/reactjs-habit-builder/)
 * Customize your profile
@@ -24,6 +27,15 @@
   * You can confirm a friend request 
 * Send an encouragement message to your friend based on their habits
 * View the messages from your friends
+## Demo
+| Features                              |     Gifs    |
+| :---                              |    :----:   |  
+| Create a new habit                | <img src="https://github.com/ichbinorange/reactjs-habit-builder/blob/readme-demo/src/img/add-habit.gif" alt="Create a new habit" width="500">       | 
+| Create a habit record             | <img src="https://github.com/ichbinorange/reactjs-habit-builder/blob/readme-demo/src/img/add-habit-record.gif" alt="Create a habit record" width="500">        | 
+| Check progress chart              | <img src="https://github.com/ichbinorange/reactjs-habit-builder/blob/readme-demo/src/img/check-chart.gif" alt="Check chart" width="500">       | 
+| Create friendship                 | <img src="https://github.com/ichbinorange/reactjs-habit-builder/blob/readme-demo/src/img/add-friend.gif" alt="Create friendship" width="500">       | 
+| Send message to a friend's habit  | <img src="https://github.com/ichbinorange/reactjs-habit-builder/blob/readme-demo/src/img/send-msg.gif" alt="Send message to a friend's habit" width="500">        | 
+| Read message from friends         | <img src="https://github.com/ichbinorange/reactjs-habit-builder/blob/readme-demo/src/img/view-msg.gif" alt="Read message from friends" width="500">        | 
 ## Tech Stack for Habit Buddy
 #### Core tech
 * Back-end (In this habit-builder repo)
@@ -37,6 +49,10 @@
   * Dockerized Spirng Boot and deployed Docker image to Heroku
 * Front-end
   * Deployed to Github Pages
+
+|         Tech Stack                      |     Database ERD    |
+| :----:                              |    :----:   |  
+| <img src="https://github.com/ichbinorange/reactjs-habit-builder/blob/readme-demo/src/img/tech-stack.png" alt="Tech Stack" width="500">               | <img src="https://github.com/ichbinorange/reactjs-habit-builder/blob/readme-demo/src/img/erd.png" alt="Database ERD" width="500">       | 
 #### React dependencies
 * [axios](https://www.npmjs.com/package/axios)
 * [react-router-dom](https://www.npmjs.com/package/react-router-dom)
