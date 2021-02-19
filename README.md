@@ -1,8 +1,9 @@
-# habit Builder (not finish yet)
-
+# Habit Buddy (not finished yet)
 ## Overview 
-#### What is Habit Builder?
+#### What is Habit Buddy?
 * Web app
+* It was inspired by the support system of [Ada developers Academy](https://adadevelopersacademy.org/)
+  * Habit Buddy tries combining a habit developing system with a friend support system
 * App target
   * People who want to track progress when building a new habit
   * People who would love to have friends support while developing their habits
@@ -11,7 +12,20 @@
   * Track habit progress
   * Create a friendship and get encouragements from friends
 ## How to get it set up
-#### Tech Stack for Habit Builder
+* Sign up/login with your google account with [Habit Buddy](https://ichbinorange.github.io/reactjs-habit-builder/)
+* Customize your profile
+* Create your first Habit
+* Submit a record about your habit, including how much time you spent on it
+  * You then have the record for the habit; also
+  * You can visualize your habit progress at a stacked bar chart either by month or by year
+  * You can check the chart by single habit or overview all the habits
+* Become friend with your friends by searching their email
+  * You can send a friend request
+  * You can confirm a friend request 
+* Send an encouragement message to your friend based on their habits
+* View the messages from your friends
+## Tech Stack for Habit Buddy
+#### Core tech
 * Back-end (In this habit-builder repo)
   * Spring Boot (Java)
 * Database
@@ -23,7 +37,13 @@
   * Dockerized Spirng Boot and deployed Docker image to Heroku
 * Front-end
   * Deployed to Github Pages
-## Resources that inspired this
+#### React dependencies
+* [axios](https://www.npmjs.com/package/axios)
+* [react-router-dom](https://www.npmjs.com/package/react-router-dom)
+* [React-Bootstrap](https://www.npmjs.com/package/react-bootstrap)
+* [React-vis](https://www.npmjs.com/package/react-vis) and its [storybook](http://uber.github.io/react-vis/website/dist/storybook/)
+* [React Date Picker](https://www.npmjs.com/package/react-datepicker)
+## Resources that made this app happened
 #### Tutorials
 * [Java concept](https://docs.oracle.com/javase/tutorial/) & [Java tutorial - Tutorialspoint](https://www.tutorialspoint.com/java/index.htm) & [Java tutorial - W3Schools](https://www.w3schools.com/java/default.asp)  
 * [TypeScript handbook](https://www.typescriptlang.org/) 
@@ -59,4 +79,3 @@
   * troubleshooting SAP issues 
     * Either try [hashrouter](https://daryllwong.medium.com/github-pages-does-not-work-for-me-f9d48fd44a5f) (this one didn't work for me)
     * or [Add a 404.html](https://github.com/rafgraph/spa-github-pages) (I ended up using this)
-    
